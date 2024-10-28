@@ -1,0 +1,1 @@
+microwave_use(mins)=5
