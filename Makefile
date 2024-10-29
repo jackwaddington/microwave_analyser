@@ -6,27 +6,23 @@ RM			=	rm -rf
 
 SRCS 		=	main.c \
 				init.c \
-				printers.c
+				printers.c \
+				waddington_report.c
 
 
-HEADER = ./inc/ray_tracer.h
+HEADER = ./inc/header.h
 
-MANPATH = $(addprefix ./srcs/, $(SRCS))
+MANPATH = $(addprefix ./src/, $(SRCS))
 
 OBJS		=	$(MANPATH:%.c=%.o)
 
 all:			$(NAME)
 
-$(NAME):		$(MLXLIB) $(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) -lm $(MLXLIB) $(MLXFLAGS) $(MLXHEADERS) -o $(NAME)
-# $(NAME):		$(OBJS)
-#			$(CC) $(CFLAGS) $(OBJS) -lm -o $(NAME)
+$(NAME):		$(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) -lm -o $(NAME)
 
 %.o:%.c
-			@$(CC) $(CFLAGS) -c $< -o $@		
-
-$(MLXLIB):
-			cmake $(MLXDIR) -B $(MLXDIR)build && make -C $(MLXDIR)build -j4
+			@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 			$(RM) $(OBJS)
